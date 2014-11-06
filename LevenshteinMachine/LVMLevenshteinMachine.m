@@ -7,21 +7,31 @@
 //
 
 #import "LVMLevenshteinMachine.h"
+#import "NSString+Levenshtein.h"
 
 @implementation LVMLevenshteinMachine
 
-- (NSInteger)distanceBetweenString:(NSString *)aString ofLength:(NSInteger)length andString:(NSString *)aSecondString ofLength:(NSInteger)secondLength
+- (NSInteger)levenshteinDistanceRecursiveBetweenString:(NSString *)s andString:(NSString *)t
 {
 
-    /* base case: empty strings */
-    if (length == 0) return secondLength;
-    if (secondLength == 0) return length;
+    /**
+     *  base case: empty strings 
+     */
     
-    /* Cost of the comparison. */
+    if (s.length == 0) return t.length;
+    if (t.length == 0) return s.length;
+    
+    /**
+     *  Cost of the comparison. 
+     */
+    
     NSInteger cost = 0;
     
-    /* test if last characters of the strings match */
-    if ([aString substringFromIndex:length-1] == [aSecondString substringFromIndex: secondLength-1])
+    /**
+     *  test if last characters of the strings match 
+     */
+    
+    if ([[s lastCharacter] isEqualToString:[t lastCharacter]])
     {
         cost = 0;
     }
@@ -30,12 +40,27 @@
         cost = 1;
     }
     
-//    /* return minimum of delete char from s, delete char from t, and delete char from both */
-//    return MIN(LevenshteinDistance(s, len_s - 1, t, len_t    ) + 1,
-//                   LevenshteinDistance(s, len_s    , t, len_t - 1) + 1,
-//                   }
-//                   LevenshteinDistance(s, len_s - 1, t, len_t - 1) + cost);
-    return 0;
+    /**
+     *  Get shorter versions of the string.
+     */
+    
+    NSString *shorterS = [s substringMinusLastCharacter];
+    NSString *shorterT = [t substringMinusLastCharacter];
+    
+    /**
+     *  Get the costs for each variation.
+     */
+    
+    //  ShorterS and original T
+    NSInteger costForShorterS = [self levenshteinDistanceRecursiveBetweenString:shorterS andString:t] + 1;
+    NSInteger costForShorterT = [self levenshteinDistanceRecursiveBetweenString:s andString:shorterT] + 1;
+    NSInteger costShorterBoth = [self levenshteinDistanceRecursiveBetweenString:shorterT andString:shorterS] + cost;
+
+    /**
+     *  Return the shortest of the three variations.
+     */
+    
+    return MIN(MIN(costForShorterS, costForShorterT), costShorterBoth);
 }
 
 @end
