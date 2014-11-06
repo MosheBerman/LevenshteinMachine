@@ -14,6 +14,8 @@
 		46F68F3A1A0B3D73003767CD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46F68F391A0B3D73003767CD /* Images.xcassets */; };
 		46F68F3D1A0B3D73003767CD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46F68F3B1A0B3D73003767CD /* LaunchScreen.xib */; };
 		46F68F491A0B3D73003767CD /* LevenshteinMachineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F68F481A0B3D73003767CD /* LevenshteinMachineTests.m */; };
+		46F68F541A0B3D8B003767CD /* LVMLevenshteinMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F68F531A0B3D8B003767CD /* LVMLevenshteinMachine.m */; };
+		46F68F571A0BDFA9003767CD /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 46F68F561A0BDFA9003767CD /* NSString+Levenshtein.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		46F68F421A0B3D73003767CD /* LevenshteinMachineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevenshteinMachineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		46F68F471A0B3D73003767CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46F68F481A0B3D73003767CD /* LevenshteinMachineTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LevenshteinMachineTests.m; sourceTree = "<group>"; };
+		46F68F521A0B3D8B003767CD /* LVMLevenshteinMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVMLevenshteinMachine.h; sourceTree = "<group>"; };
+		46F68F531A0B3D8B003767CD /* LVMLevenshteinMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVMLevenshteinMachine.m; sourceTree = "<group>"; };
+		46F68F551A0BDFA9003767CD /* NSString+Levenshtein.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Levenshtein.h"; sourceTree = "<group>"; };
+		46F68F561A0BDFA9003767CD /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,10 @@
 				46F68F311A0B3D73003767CD /* AppDelegate.m */,
 				46F68F331A0B3D73003767CD /* ViewController.h */,
 				46F68F341A0B3D73003767CD /* ViewController.m */,
+				46F68F521A0B3D8B003767CD /* LVMLevenshteinMachine.h */,
+				46F68F531A0B3D8B003767CD /* LVMLevenshteinMachine.m */,
+				46F68F551A0BDFA9003767CD /* NSString+Levenshtein.h */,
+				46F68F561A0BDFA9003767CD /* NSString+Levenshtein.m */,
 				46F68F361A0B3D73003767CD /* Main.storyboard */,
 				46F68F391A0B3D73003767CD /* Images.xcassets */,
 				46F68F3B1A0B3D73003767CD /* LaunchScreen.xib */,
@@ -220,8 +230,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F68F351A0B3D73003767CD /* ViewController.m in Sources */,
+				46F68F571A0BDFA9003767CD /* NSString+Levenshtein.m in Sources */,
 				46F68F321A0B3D73003767CD /* AppDelegate.m in Sources */,
 				46F68F2F1A0B3D73003767CD /* main.m in Sources */,
+				46F68F541A0B3D8B003767CD /* LVMLevenshteinMachine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
