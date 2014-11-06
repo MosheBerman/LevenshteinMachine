@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "NSString+Levenshtein.h"
 
 @interface LevenshteinMachineTests : XCTestCase
 
@@ -25,16 +26,20 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testLastCharacter
+{
+    NSString *sampleString = @"Hello World!";
+    NSString *lastCharacter = [sampleString lastCharacter];
+    
+    XCTAssertEqualObjects(lastCharacter, @"!");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testShorterString
+{
+    NSString *sampleString = @"Watson, come here";
+    NSString *shorterString = [sampleString substringMinusLastCharacter];
+    
+    XCTAssertEqualObjects(shorterString, @"Watson, come her");
 }
 
 @end
