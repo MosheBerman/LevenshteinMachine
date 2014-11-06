@@ -73,21 +73,21 @@
 }
 
 /**
- *  Finds the closest match for a test string in a given array.
+ *  Finds the closest possible match for a test string in a given array.
  *
  *  @param string The needle.
  *  @param array The haystack
  *
- *  @return The string with the closest match. If there are no strings in array, returns nil.
+ *  @return An array with the closest matches. If there are no strings in the input, returns nil.
  */
 
-- (NSString *)closestMatchForString:(NSString *)string inArray:(NSArray *)array
+- (NSArray *)candidateMatchesForString:(NSString *)string inArray:(NSArray *)array
 {
     /**
-     *  Grab a string.
+     *  A container for closest results.
      */
     
-    NSString * closest = nil;
+    NSMutableArray *closest = [[NSMutableArray alloc] init];
     
     /**
      *  The maximum distance is at most the longest string.
@@ -104,24 +104,71 @@
         }
     }
     
-//    NSLog(@"Initial maximum is %li", maxDFistance);
+    NSLog(@"Initial maximum is %li", maxDistance);
     
     for (NSString *testString in array)
     {
         NSInteger distance = [self levenshteinDistanceRecursiveBetweenString:string andString:testString];
         
-//        NSLog(@"Distance between '%@' and '%@' is %li", string, testString, distance);
+        NSLog(@"Distance between '%@' and '%@' is %li", string, testString, distance);
         
-        if (distance < maxDistance)
-        {
-            closest = testString;
+        if (distance < maxDistance) {
+            closest = [[NSMutableArray alloc] init];
             maxDistance = distance;
+        }
+        
+        if (distance == maxDistance)
+        {
+            [closest addObject:testString];
         }
         
     }
     
     return closest;
     
+}
+
+/**
+ *  Finds the closest possible match for a test string in a given array.
+ *
+ *  @param string The needle.
+ *  @param array The haystack
+ *
+ *  @return The closest string match. If there are no strings in the input, returns nil.
+ */
+
+- (NSArray *)bestMatchesForString:(NSString *)string inArray:(NSArray *)array
+{
+    
+    /**
+     *  Grab the candidate matches.
+     */
+    
+    NSArray *candidates = [self candidateMatchesForString:string inArray:array];
+    
+    /**
+     *  Count the number of words in the input.
+     */
+    
+    NSInteger inputWordCount = [string componentsSeparatedByString:@" "].count;
+    
+    /**
+     *  Find the matches that contain the same number of words.
+     */
+    
+    NSMutableArray *output = [[NSMutableArray alloc] init];
+    
+    for (NSString *candidate in candidates)
+    {
+        NSInteger candidateWordCount = [candidate componentsSeparatedByString:@" "].count;
+
+        if (candidateWordCount == inputWordCount)
+        {
+            [output addObject:candidate];
+        }
+    }
+    
+    return output;
 }
 
 @end

@@ -22,14 +22,28 @@
 - (NSInteger)levenshteinDistanceRecursiveBetweenString:(NSString *)s andString:(NSString *)t;
 
 /**
- *  Finds the closest match for a test string in a given array.
+ *  Finds the possible matches for a test string in a given array.
  *
  *  @param string The needle.
  *  @param array The haystack
  *
- *  @return The string with the closest match. If there are no strings in array, returns nil.
+ *  @return An array with the closest matches. If there are no strings in the input, returns nil.
  */
 
-- (NSString *)closestMatchForString:(NSString *)string inArray:(NSArray *)array;
+- (NSArray *)candidateMatchesForString:(NSString *)string inArray:(NSArray *)array;
+
+
+/**
+ *  Finds the closest possible matches for a test string in a given array.
+ *  Finds candidates and then verifies word count in the input compared to 
+ *  candidate string.
+ *
+ *  @param string The needle.
+ *  @param array The haystack
+ *
+ *  @return An array of the closest string match. If there are no strings in the input, returns nil.
+ */
+
+- (NSArray *)bestMatchesForString:(NSString *)string inArray:(NSArray *)array;
 
 @end
