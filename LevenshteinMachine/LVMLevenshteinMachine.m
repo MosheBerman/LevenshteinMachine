@@ -11,6 +11,15 @@
 
 @implementation LVMLevenshteinMachine
 
+/**
+ *  Compares two strings using the Levenshtein Distance algorithm.
+ *
+ *  @param s The first string, used to compare to t.
+ *  @param t The second string, used to compare to s.
+ *
+ *  @return An integer value representing the distance between the strings.
+ */
+
 - (NSInteger)levenshteinDistanceRecursiveBetweenString:(NSString *)s andString:(NSString *)t
 {
 
@@ -61,6 +70,53 @@
      */
     
     return MIN(MIN(costForShorterS, costForShorterT), costShorterBoth);
+}
+
+/**
+ *  Finds the closest match for a test string in a given array.
+ *
+ *  @param string The needle.
+ *  @param array The haystack
+ *
+ *  @return The string with the closest match. If there are no strings in array, returns nil.
+ */
+
+- (NSString *)closestMatchForString:(NSString *)string inArray:(NSArray *)array
+{
+    /**
+     *  Grab a string.
+     */
+    
+    NSString * closest = nil;
+    
+    /**
+     *  The maximum distance is at most the longest string.
+     */
+    
+    NSInteger maxDistance = (NSInteger)^(void){
+        NSInteger max = string.length;
+        
+        for (NSString *aString in array)
+        {
+            max = MAX(string.length, aString.length);
+        }
+        
+        return max;
+    };
+    
+    for (NSString *testString in array)
+    {
+        NSInteger distance = [self levenshteinDistanceRecursiveBetweenString:string andString:testString];
+        
+        if (distance < maxDistance)
+        {
+            closest = testString;
+        }
+        
+    }
+    
+    return closest;
+    
 }
 
 @end
