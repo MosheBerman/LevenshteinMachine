@@ -93,24 +93,29 @@
      *  The maximum distance is at most the longest string.
      */
     
-    NSInteger maxDistance = (NSInteger)^(void){
-        NSInteger max = string.length;
-        
-        for (NSString *aString in array)
+    NSInteger maxDistance = 0;
+    
+    
+    for (NSString *testString in array)
+    {
+        if (testString.length > maxDistance)
         {
-            max = MAX(string.length, aString.length);
+            maxDistance = MAX(testString.length, string.length);
         }
-        
-        return max;
-    };
+    }
+    
+//    NSLog(@"Initial maximum is %li", maxDFistance);
     
     for (NSString *testString in array)
     {
         NSInteger distance = [self levenshteinDistanceRecursiveBetweenString:string andString:testString];
         
+//        NSLog(@"Distance between '%@' and '%@' is %li", string, testString, distance);
+        
         if (distance < maxDistance)
         {
             closest = testString;
+            maxDistance = distance;
         }
         
     }
